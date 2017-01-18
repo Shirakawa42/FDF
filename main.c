@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 12:47:18 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/09 12:30:52 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/18 13:23:38 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,33 +76,6 @@ t_param	*int_reader(t_param *truc, char **av)
 	return (truc);
 }
 
-void	pixel_puter(t_param *truc, char **av)
-{
-	int		x;
-	int		y;
-
-	truc = int_reader(truc, av);
-	y = 0;
-	truc->padding = 0;
-	truc->zoom = 1;
-	truc = segment_tracer(truc);
-	/*while (y < truc->nby)
-	{
-		x = 0;
-		while (x < truc->nbx)
-		{
-			truc->x2 =  50 + (50 * x) + (truc->tab[y][x] * 2);
-			truc->y2 = 50 + (50 * y) - (truc->tab[y][x] * 2);
-			truc = segment_tracer(truc);
-			truc->x1 = truc->x2;
-			truc->y1 = truc->y2;
-			x++;
-		}
-		y++;
-	}*/
-	mlx_put_image_to_window(truc->id, truc->win, truc->img, 0, 0);
-}
-
 int		main(int ac, char **av)
 {
 	t_param	*truc;
@@ -110,16 +83,8 @@ int		main(int ac, char **av)
 
 	if ((truc = (t_param*)malloc(sizeof(t_param))) == NULL)
 		return (0);
-	//if (ac != 2)
-	//	return (0);
-
-
-	truc->x1 = atoi(av[2]);
-	truc->y1 = atoi(av[3]);
-	truc->x2 = atoi(av[4]);
-	truc->y2 = atoi(av[5]);
-
-
+	if (ac != 2)
+		return (0);
 	truc->zoom = 1;
 	fd = open(av[1], O_RDONLY);
 	get_next_line(fd, av);
@@ -133,7 +98,8 @@ int		main(int ac, char **av)
 	truc->img = mlx_new_image(truc->id, 800, 600);
 	truc->data_addr = mlx_get_data_addr(truc->img, &truc->bpx,
 			&truc->size, &truc->idgaf);
-	pixel_puter(truc, av);
+	truc = int_reader(truc, av);
+	pixel_puter(truc);
 	mlx_loop(truc->id);
 	return (0);
 }

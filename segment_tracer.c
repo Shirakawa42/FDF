@@ -6,87 +6,109 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 12:25:30 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/10 15:37:35 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/16 15:13:17 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_param		*revert_x(t_param *truc)
+t_param		*revert_xy(t_param *truc)
 {
 	int		tmp;
 
 	tmp = truc->x1;
-	truc->x1 = truc->x2;
-	truc->x2 = tmp;
-	return (truc);
-}
-
-t_param		*revert_y(t_param *truc)
-{
-	int		tmp;
-
-	tmp = truc->y1;
-	truc->y1 = truc->y2;
+	truc->x1 = truc->y1;
+	truc->y1 = tmp;
+	tmp = truc->x2;
+	truc->x2 = truc->y2;
 	truc->y2 = tmp;
 	return (truc);
 }
 
-t_param		*left_right(t_param *truc, int dx, int dy, int e)
+void	up_down(t_param *truc, int dx, int dy, int e)
 {
-	if (truc->x1 < truc->x2)
-	{
-		revert_x(truc);
-		revert_y(truc);
-	}
-	e = truc->x1 - truc->x2;
+	truc = revert_xy(truc);
+	e = truc->x2 - truc->x1;
+	if (truc->x2 < truc->x1)
+		e = truc->x1 - truc->x2;
 	dx = e * 2;
 	dy = (truc->y2 - truc->y1) * 2;
-	if (truc->y1 > truc->y2)
+	if (dy < 0)
 		dy = (truc->y1 - truc->y2) * 2;
-	while (truc->x1 > truc->x2)
-	{
-		*(unsigned *)(truc->data_addr + ((truc->y1 + truc->padding) *
-					truc->size) + ((truc->x1 + truc->padding) *
-						truc->bpx / 8)) = 0x0000FFFF;
-		truc->x1 = truc->x1 - 1;
-		if ((e = e - dy) <= 0)
-		{
-			truc->y1 = truc->y1 + 1;
-			if (truc->y1 > truc->y2)
-				truc->y1 = truc->y1 - 2;
-			e = e + dx;
-		}
-	}
-	return (truc);
-}
-
-t_param		*up_down(t_param *truc, int dx, int dy, int e)
-{
-	if (truc->y1 > truc->y2)
-	{
-		revert_x(truc);
-		revert_y(truc);
-	}
-	e = truc->x1 - truc->x2;
-	dx = e * 2;
-	dy = (truc->y2 - truc->y1) * 2;
-	while (truc->y1 > truc->y2)
+	while (truc->x1 != truc->x2)
 	{
 		*(unsigned *)(truc->data_addr + ((truc->x1 + truc->padding) *
 					truc->size) + ((truc->y1 + truc->padding) *
-						truc->bpx / 8)) = 0x0000FFFF;
-		truc->y1 = truc->y1 - 1;
+					truc->bpx / 8)) = 0x0000FFFF;
+		if (truc->x2 < truc->x1)
+			truc->x1 = truc->x1 - 2;
+		truc->x1 = truc->x1 + 1;
 		if ((e = e - dy) <= 0)
 		{
+			if (truc->y1 > truc->y2)
+				truc->y1 = truc->y1 - 2;
 			truc->y1 = truc->y1 + 1;
 			e = e + dx;
 		}
 	}
-	return (truc);
 }
 
-t_param		*segment_tracer(t_param *truc)
+void	left_right(t_param *truc, int dx, int dy, int e)
+{
+	e = truc->x2 - truc->x1;
+	if (truc->x2 < truc->x1)
+		e = truc->x1 - truc->x2;
+	dx = e * 2;
+	dy = (truc->y2 - truc->y1) * 2;
+	if (dy < 0)
+		dy = (truc->y1 - truc->y2) * 2;
+	while (truc->x1 != truc->x2)
+	{
+		*(unsigned *)(truc->data_addr + ((truc->y1 + truc->padding) *
+					truc->size) + ((truc->x1 + truc->padding) *
+					truc->bpx / 8)) = 0x0000FFFF;
+		if (truc->x2 < truc->x1)
+			truc->x1 = truc->x1 - 2;
+		truc->x1 = truc->x1 + 1;
+		if ((e = e - dy) <= 0)
+		{
+			if (truc->y1 > truc->y2)
+				truc->y1 = truc->y1 - 2;
+			truc->y1 = truc->y1 + 1;
+			e = e + dx;
+		}
+	}
+}
+
+void	loltest(t_param *truc, int dx, int dy, int e)
+{
+	e = truc->x2cp - truc->x1cp;
+	if (truc->x2cp < truc->x1cp)
+		e = truc->x1cp - truc->x2cp;
+	dx = e * 2;
+	dy = (truc->y2cp - truc->y1cp) * 2;
+	if (dy < 0)
+		dy = (truc->y1cp - truc->y2cp) * 2;
+	while (truc->x1cp != truc->x2cp)
+	{
+		if (truc->x2cp < truc->x1cp)
+			truc->x1cp = truc->x1cp - 2;
+		truc->x1cp = truc->x1cp + 1;
+		if ((e = e - dy) <= 0)
+		{
+			if (truc->y1cp > truc->y2cp)
+				truc->y1cp = truc->y1cp - 2;
+			truc->y1cp = truc->y1cp + 1;
+			e = e + dx;
+		}
+	}
+	if (truc->y1cp == truc->y2cp)
+		left_right(truc, dx, dy, e);
+	else
+		up_down(truc, dx, dy, e);
+}
+
+void	segment_tracer(t_param *truc)
 {
 	int		dx;
 	int		dy;
@@ -96,9 +118,12 @@ t_param		*segment_tracer(t_param *truc)
 	truc->y1 = truc->y1 * truc->zoom;
 	truc->x2 = truc->x2 * truc->zoom;
 	truc->y2 = truc->y2 * truc->zoom;
+	truc->x1cp = truc->x1;
+	truc->x2cp = truc->x2;
+	truc->y1cp = truc->y1;
+	truc->y2cp = truc->y2;
 	e = 0;
 	dx = 0;
 	dy = 0;
-	return (up_down(truc, dx, dy, e));
-	return (left_right(truc, dx, dy, e));
+	loltest(truc, dx, dy, e);
 }
