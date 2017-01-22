@@ -76,6 +76,15 @@ t_param	*int_reader(t_param *truc, char **av)
 	return (truc);
 }
 
+int		calc_space(t_param *truc)
+{
+	if (truc->nbx > truc->nby && 700 / (truc->nbx + 5) > 3)
+			return (700 / (truc->nbx + 5));
+	else if (700 / (truc->nby + 5) > 3)
+			return (700 / (truc->nby + 5));
+	return (3);
+}
+
 int		main(int ac, char **av)
 {
 	t_param	*truc;
@@ -93,13 +102,15 @@ int		main(int ac, char **av)
 	while (get_next_line(fd, av))
 		truc->nby = truc->nby + 1;
 	close(fd);
+	truc->space = calc_space(truc);
 	truc->id = mlx_init();
-	truc->win = mlx_new_window(truc->id, 800, 600, "FDF");
-	truc->img = mlx_new_image(truc->id, 800, 600);
+	truc->win = mlx_new_window(truc->id, 1000, 800, "FDF");
+	truc->img = mlx_new_image(truc->id, 1000, 800);
 	truc->data_addr = mlx_get_data_addr(truc->img, &truc->bpx,
 			&truc->size, &truc->idgaf);
 	truc = int_reader(truc, av);
 	pixel_puter(truc);
+	mlx_key_hook(truc->win, keyboard_input, truc);
 	mlx_loop(truc->id);
 	return (0);
 }

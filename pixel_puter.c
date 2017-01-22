@@ -20,16 +20,16 @@ void	pixel_puter_vertical(t_param *truc)
 	x = 0;
 	while (x < truc->nbx)
 	{
-		truc->x1 = 50 + (25 * x);
-		truc->y1 = 50;
+		truc->x1 = (500 - (truc->space * truc->nbx / 2)) + (truc->space * x);
+		truc->y1 = 400 - (truc->space * truc->nby / 2);
 		y = 0;
 		while (y < truc->nby)
 		{
-			truc->x2 = 50 + (25 * x);
-			truc->y2 = 50 + (25 * y);
+			truc->x2 = (500 - (truc->space * truc->nbx / 2)) + (truc->space * x);
+			truc->y2 = (400 - (truc->space * truc->nby / 2)) + (truc->space * y) - truc->tab[y][x];
 			segment_tracer(truc);
-			truc->x1 = 50 + (25 * x);
-			truc->y1 = 50 + (25 * y);
+			truc->x1 = (500 - (truc->space * truc->nbx / 2)) + (truc->space * x);
+			truc->y1 = (400 - (truc->space * truc->nby / 2)) + (truc->space * y) - truc->tab[y][x];
 			y++;
 		}
 		x++;
@@ -46,16 +46,16 @@ void	pixel_puter(t_param *truc)
 	truc->padding = 0;
 	while (y < truc->nby)
 	{
-		truc->x1 = 50;
-		truc->y1 = 50 + (25 * y);
+		truc->x1 = 500 - (truc->space * truc->nbx / 2);
+		truc->y1 = (400 - (truc->space * truc->nby / 2)) + (truc->space * y);
 		x = 0;
 		while (x < truc->nbx)
 		{
-			truc->x2 = 50 + (25 * x);
-			truc->y2 = 50 + (25 * y);
+			truc->x2 = (500 - (truc->space * truc->nbx / 2)) + (truc->space * x);
+			truc->y2 = (400 - (truc->space * truc->nby / 2)) + (truc->space * y) - truc->tab[y][x];
 			segment_tracer(truc);
-			truc->x1 = 50 + (25 * x);
-			truc->y1 = 50 + (25 * y);
+			truc->x1 = (500 - (truc->space * truc->nbx / 2)) + (truc->space * x);
+			truc->y1 = (400 - (truc->space * truc->nby / 2)) + (truc->space * y) - truc->tab[y][x];
 			x++;
 		}
 		y++;

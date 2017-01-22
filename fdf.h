@@ -44,9 +44,11 @@
 	int		idgaf;
 	int		**tab;
 	int		z;
+	int		space;
 }				t_param;
 
 void	segment_tracer(t_param *truc);
 void	pixel_puter(t_param *truc);
+int		keyboard_input(int keycode, void *truc);
 
 #endif
