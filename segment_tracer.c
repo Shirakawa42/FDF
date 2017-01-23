@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 12:25:30 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/16 15:13:17 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/23 17:29:02 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	up_down(t_param *truc, int dx, int dy, int e)
 	{
 		*(unsigned *)(truc->data_addr + ((truc->x1 + truc->padding) *
 					truc->size) + ((truc->y1 + truc->padding) *
-					truc->bpx / 8)) = 0x0000FFFF;
+					truc->bpx / 8)) = truc->color;
 		if (truc->x2 < truc->x1)
 			truc->x1 = truc->x1 - 2;
 		truc->x1 = truc->x1 + 1;
@@ -66,8 +66,8 @@ void	left_right(t_param *truc, int dx, int dy, int e)
 	{
 		*(unsigned *)(truc->data_addr + ((truc->y1 + truc->padding) *
 					truc->size) + ((truc->x1 + truc->padding) *
-					truc->bpx / 8)) = 0x0000FFFF;
-		if (truc->x2 < truc->x1)
+					truc->bpx / 8)) = truc->color;
+			if (truc->x2 < truc->x1)
 			truc->x1 = truc->x1 - 2;
 		truc->x1 = truc->x1 + 1;
 		if ((e = e - dy) <= 0)
@@ -114,10 +114,6 @@ void	segment_tracer(t_param *truc)
 	int		dy;
 	int		e;
 
-	truc->x1 = truc->x1 * truc->zoom;
-	truc->y1 = truc->y1 * truc->zoom;
-	truc->x2 = truc->x2 * truc->zoom;
-	truc->y2 = truc->y2 * truc->zoom;
 	truc->x1cp = truc->x1;
 	truc->x2cp = truc->x2;
 	truc->y1cp = truc->y1;

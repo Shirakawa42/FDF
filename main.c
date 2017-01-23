@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 12:47:18 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/18 13:23:38 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/23 18:01:44 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		return (0);
 	truc->zoom = 1;
+	truc->xrotate = 0;
+	truc->yrotate = 0;
+	truc->zrotate = 0;
+	truc->padding = 0;
 	fd = open(av[1], O_RDONLY);
 	get_next_line(fd, av);
 	truc->nbx = nb_of_nbs(*av);
@@ -109,6 +113,7 @@ int		main(int ac, char **av)
 	truc->data_addr = mlx_get_data_addr(truc->img, &truc->bpx,
 			&truc->size, &truc->idgaf);
 	truc = int_reader(truc, av);
+	truc->color = 0x0000FFFF;
 	pixel_puter(truc);
 	mlx_key_hook(truc->win, keyboard_input, truc);
 	mlx_loop(truc->id);
