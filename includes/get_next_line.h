@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:29:05 by lvasseur          #+#    #+#             */
-/*   Updated: 2016/12/21 15:17:24 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 15:27:19 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include "../srcs/libft/libft.h"
 
 int		get_next_line(const int fd, char **line);
 

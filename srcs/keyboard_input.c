@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:01:34 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 14:42:07 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 16:36:25 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,33 @@ void	keyboard_input_other(int keycode, void *truc)
 	if (keycode == 91)
 		((t_param*)truc)->zrotate -= 5;
 	if (keycode == 13)
-		((t_param*)truc)->ypadding -= 5;
+		((t_param*)truc)->ypadding -= 10;
 	if (keycode == 0)
-		((t_param*)truc)->xpadding -= 5;
+		((t_param*)truc)->xpadding -= 10;
 	if (keycode == 1)
-		((t_param*)truc)->ypadding += 5;
+		((t_param*)truc)->ypadding += 10;
 	if (keycode == 2)
-		((t_param*)truc)->xpadding += 5;
+		((t_param*)truc)->xpadding += 10;
+}
+
+void	keyboard_input_exit(int keycode, t_param *truc)
+{
+	int		y;
+
+	if (keycode == 53)
+	{
+		y = -1;
+		while (++y < truc->nby)
+			free(truc->tab[y]);
+		free(truc->tab);
+		free(truc);
+		exit(1);
+	}
 }
 
 int		keyboard_input(int keycode, void *truc)
 {
 	ft_putendl(ft_itoa(keycode));
-	if (keycode == 53)
-		exit(1);
 	if (keycode == 69 || keycode == 78)
 		(keycode == 69) ? (((t_param*)truc)->zoom += 0.05) :
 			(((t_param*)truc)->zoom -= 0.05);
@@ -95,7 +108,9 @@ int		keyboard_input(int keycode, void *truc)
 		((t_param*)truc)->color = 0x00F00FF0;
 	if (keycode == 88)
 		((t_param*)truc)->color = 0x0000FF00;
+	keyboard_input_exit(keycode, (t_param*)truc);
 	keyboard_input_other(keycode, truc);
+	keyboard_input_rezet(keycode, (t_param*)truc);
 	update(truc);
 	return (0);
 }

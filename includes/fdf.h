@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 14:51:18 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 14:34:21 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 16:28:50 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ void	segment_tracer(t_param *truc);
 int		keyboard_input(int keycode, void *truc);
 t_param	*int_reader(t_param *truc, char **av);
 int		w_changes(char *str);
+int		error_one(char *av);
+void	keyboard_input_rezet(int keycode, t_param *truc);
 
 #endif
