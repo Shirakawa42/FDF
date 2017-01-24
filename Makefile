@@ -6,13 +6,13 @@
 #    By: zadrien <zadrien@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/26 20:45:05 by zadrien           #+#    #+#              #
-#    Updated: 2017/01/24 14:42:36 by lvasseur         ###   ########.fr        #
+#    Updated: 2017/01/24 17:37:41 by lvasseur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: make all clean fclean re
 
-NAME = FDF
+NAME = fdf
 
 LIB = -L srcs/libft/ -lft
 
