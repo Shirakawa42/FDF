@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 14:51:18 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 16:28:50 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 16:41:20 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "get_next_line.h"
 # include <math.h>
 
-	typedef struct	s_param
+typedef struct	s_param
 {
 	int		nbx;
 	int		nby;
@@ -61,12 +61,12 @@
 	int		fat;
 }				t_param;
 
-void	pixel_puter(t_param *truc);
-void	segment_tracer(t_param *truc);
-int		keyboard_input(int keycode, void *truc);
-t_param	*int_reader(t_param *truc, char **av);
-int		w_changes(char *str);
-int		error_one(char *av);
-void	keyboard_input_rezet(int keycode, t_param *truc);
+void			pixel_puter(t_param *truc);
+void			segment_tracer(t_param *truc);
+int				keyboard_input(int keycode, void *truc);
+t_param			*int_reader(t_param *truc, char **av);
+int				w_changes(char *str);
+int				error_one(char *av);
+void			keyboard_input_rezet(int keycode, t_param *truc);
 
 #endif
