@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 14:51:18 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/23 17:39:43 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 14:16:42 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
 # include <math.h>
+# include <time.h>
 
 	typedef struct	s_param
 {
@@ -35,7 +36,8 @@
 	int		x2cp;
 	int		y2cp;
 	float	zoom;
-	int		padding;
+	int		xpadding;
+	int		ypadding;
 	void	*win;
 	void	*id;
 	int		bpx;
@@ -57,10 +59,13 @@
 	int		xrotate;
 	int		yrotate;
 	int		zrotate;
+	int		fat;
 }				t_param;
 
 void	pixel_puter(t_param *truc);
 void	segment_tracer(t_param *truc);
 int		keyboard_input(int keycode, void *truc);
+t_param	*int_reader(t_param *truc, char **av);
+int		w_changes(char *str);
 
 #endif

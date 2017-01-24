@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/06 12:25:30 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/23 17:29:02 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 14:16:01 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_param		*revert_xy(t_param *truc)
 	return (truc);
 }
 
-void	up_down(t_param *truc, int dx, int dy, int e)
+void		up_down(t_param *truc, int dx, int dy, int e)
 {
 	truc = revert_xy(truc);
 	e = truc->x2 - truc->x1;
@@ -37,9 +37,9 @@ void	up_down(t_param *truc, int dx, int dy, int e)
 		dy = (truc->y1 - truc->y2) * 2;
 	while (truc->x1 != truc->x2)
 	{
-		*(unsigned *)(truc->data_addr + ((truc->x1 + truc->padding) *
-					truc->size) + ((truc->y1 + truc->padding) *
-					truc->bpx / 8)) = truc->color;
+		if (truc->x1 < 800 && truc->y1 < 1000 && truc->x1 > 0 && truc->y1 > 0)
+			*(unsigned *)(truc->data_addr + (truc->x1 * truc->size) +
+					(truc->y1 * truc->bpx / 8)) = truc->color;
 		if (truc->x2 < truc->x1)
 			truc->x1 = truc->x1 - 2;
 		truc->x1 = truc->x1 + 1;
@@ -53,7 +53,7 @@ void	up_down(t_param *truc, int dx, int dy, int e)
 	}
 }
 
-void	left_right(t_param *truc, int dx, int dy, int e)
+void		left_right(t_param *truc, int dx, int dy, int e)
 {
 	e = truc->x2 - truc->x1;
 	if (truc->x2 < truc->x1)
@@ -64,10 +64,10 @@ void	left_right(t_param *truc, int dx, int dy, int e)
 		dy = (truc->y1 - truc->y2) * 2;
 	while (truc->x1 != truc->x2)
 	{
-		*(unsigned *)(truc->data_addr + ((truc->y1 + truc->padding) *
-					truc->size) + ((truc->x1 + truc->padding) *
-					truc->bpx / 8)) = truc->color;
-			if (truc->x2 < truc->x1)
+		if (truc->x1 < 1000 && truc->y1 < 800 && truc->x1 > 0 && truc->y1 > 0)
+			*(unsigned *)(truc->data_addr + (truc->y1 * truc->size) +
+					(truc->x1 * truc->bpx / 8)) = truc->color;
+		if (truc->x2 < truc->x1)
 			truc->x1 = truc->x1 - 2;
 		truc->x1 = truc->x1 + 1;
 		if ((e = e - dy) <= 0)
@@ -80,7 +80,7 @@ void	left_right(t_param *truc, int dx, int dy, int e)
 	}
 }
 
-void	loltest(t_param *truc, int dx, int dy, int e)
+void		loltest(t_param *truc, int dx, int dy, int e)
 {
 	e = truc->x2cp - truc->x1cp;
 	if (truc->x2cp < truc->x1cp)
@@ -108,7 +108,7 @@ void	loltest(t_param *truc, int dx, int dy, int e)
 		up_down(truc, dx, dy, e);
 }
 
-void	segment_tracer(t_param *truc)
+void		segment_tracer(t_param *truc)
 {
 	int		dx;
 	int		dy;
