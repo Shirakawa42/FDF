@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 14:51:18 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 14:16:42 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 14:34:21 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
+# include "../srcs/libft/libft.h"
+# include "get_next_line.h"
 # include <math.h>
-# include <time.h>
 
 	typedef struct	s_param
 {

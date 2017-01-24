@@ -6,11 +6,11 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:27:03 by lvasseur          #+#    #+#             */
-/*   Updated: 2016/12/08 17:09:36 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 14:35:20 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 char	*ft_setline(char *str)
 {
