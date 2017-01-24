@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 12:47:18 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 17:32:46 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 17:50:23 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int		w_changes(char *str)
 
 int		calc_space(t_param *truc)
 {
-	if (truc->nbx > truc->nby && 700 / (truc->nbx + 5) > 3)
+	if (truc->nbx > truc->nby && 700 / (truc->nbx + 5) > 1)
 		return (700 / (truc->nbx + 5));
-	else if (700 / (truc->nby + 5) > 3)
+	else if (700 / (truc->nby + 5) > 1)
 		return (700 / (truc->nby + 5));
-	return (3);
+	return (1);
 }
 
 void	set_base(t_param *truc, char **av)
