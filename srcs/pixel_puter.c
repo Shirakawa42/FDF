@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:35:37 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 14:41:59 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 17:43:53 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ float	radiantator(int degre)
 
 void	matrice_ator(t_param *truc, float x, float y, float z)
 {
+	z = z / 4;
 	truc->tmpx = x;
 	truc->tmpy = y * cos(truc->rotx) + z * -sin(truc->rotx);
 	truc->tmpz = y * sin(truc->rotx) + z * cos(truc->rotx);
