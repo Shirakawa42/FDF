@@ -6,11 +6,11 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:01:34 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 14:07:08 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 14:42:07 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../includes/fdf.h"
 
 t_param	*int_reader(t_param *truc, char **av)
 {

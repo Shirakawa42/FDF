@@ -6,7 +6,7 @@
 #    By: zadrien <zadrien@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/26 20:45:05 by zadrien           #+#    #+#              #
-#    Updated: 2017/01/24 14:32:59 by lvasseur         ###   ########.fr        #
+#    Updated: 2017/01/24 14:42:36 by lvasseur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT = srcs/libft/libft.a
 C_DIR = srcs/
 
 SRCS = main.c pixel_puter.c keyboard_input.c segment_tracer.c \
-       get_next_line.c
+       get_next_line.c errors.c
 
 SRC = $(addprefix $(C_DIR), $(SRCS))
 

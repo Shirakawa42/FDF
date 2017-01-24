@@ -6,11 +6,11 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:35:37 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 14:19:31 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 14:41:59 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../includes/fdf.h"
 
 float	radiantator(int degre)
 {
