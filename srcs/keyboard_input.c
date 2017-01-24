@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:01:34 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 16:36:25 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 17:32:18 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	keyboard_input_exit(int keycode, t_param *truc)
 
 int		keyboard_input(int keycode, void *truc)
 {
-	ft_putendl(ft_itoa(keycode));
 	if (keycode == 69 || keycode == 78)
 		(keycode == 69) ? (((t_param*)truc)->zoom += 0.05) :
 			(((t_param*)truc)->zoom -= 0.05);

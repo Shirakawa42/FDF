@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:39:32 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 16:35:11 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/24 17:27:38 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int		error_one(char *str)
 
 	i = 0;
 	while (str[i])
-		if ((str[i] <= '9' && str[i] >= '0') || str[i] == '-' || str[i] == ' ')
+		if ((str[i] <= '9' && str[i] >= '0') || str[i] == '-' || str[i] == ' '
+				|| str[i] == ',' || str[i] == 'x' || str[i] == '\n' ||
+				(str[i] >= 'a' && str[i] <= 'f') || str[i] == 'F')
 			i++;
 		else
 			return (-1);
