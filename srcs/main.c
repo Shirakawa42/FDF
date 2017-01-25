@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 12:47:18 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/25 13:55:06 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/25 14:18:13 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,12 @@ int		nb_of_nbs(char *str)
 	nb = 0;
 	while (str[i])
 	{
-		if ((str[i] >= '0' && str[i] <= '9') || str[i] == '-')
-		{
-			while (str[i] && str[i] != ' ')
-				i++;
+		while ((str[i] < '0' || str[i] > '9') && str[i])
+			i++;
+		if (str[i])
 			nb++;
-		}
-		else
-			while (str[i] == ' ')
-				i++;
+		while (str[i] && str[i] != ' ')
+			i++;
 	}
 	return (nb);
 }
