@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:39:32 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 17:27:38 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/25 13:55:00 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ void	keyboard_input_rezet(int keycode, t_param *truc)
 	}
 }
 
-int		error_one(char *str)
+int		errors(char **av)
 {
-	int		i;
+	int		fd;
+	int		max;
 
-	i = 0;
-	while (str[i])
-		if ((str[i] <= '9' && str[i] >= '0') || str[i] == '-' || str[i] == ' '
-				|| str[i] == ',' || str[i] == 'x' || str[i] == '\n' ||
-				(str[i] >= 'a' && str[i] <= 'f') || str[i] == 'F')
-			i++;
-		else
+	fd = open(av[1], O_RDONLY);
+	get_next_line(fd, av);
+	max = nb_of_nbs(*av);
+	while (get_next_line(fd, av))
+		if (nb_of_nbs(*av) != max)
 			return (-1);
-	return (1);
+	close(fd);
+	return (0);
 }

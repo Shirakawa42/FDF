@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:01:34 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 17:32:18 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/25 12:55:22 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ t_param	*int_reader(t_param *truc, char **av)
 	int		fd;
 	int		w;
 
-	i = truc->nbx + 1;
-	if ((truc->tab = (int**)malloc(sizeof(int*) * (truc->nby * 2))) == NULL)
+	i = -1;
+	if ((truc->tab = (int**)malloc(sizeof(int*) * truc->nby)) == NULL)
 		return (NULL);
-	while (--i)
-		if ((truc->tab[i - 1] = (int*)malloc(sizeof(int) * truc->nbx)) == NULL)
+	while (++i < truc->nby)
+		if ((truc->tab[i] = (int*)malloc(sizeof(int) * truc->nbx)) == NULL)
 			return (NULL);
 	fd = open(av[1], O_RDONLY);
 	i = -1;

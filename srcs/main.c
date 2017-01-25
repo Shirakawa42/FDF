@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 12:47:18 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 17:50:23 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/25 13:55:06 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,13 @@ int		nb_of_nbs(char *str)
 	{
 		if ((str[i] >= '0' && str[i] <= '9') || str[i] == '-')
 		{
-			while ((str[i] >= '0' && str[i] <= '9') || str[i] == '-' ||
-					str[i] == 'x' || str[i] == ',' ||
-					(str[i] >= 'a' && str[i] <= 'f') || str[i] == 'F')
+			while (str[i] && str[i] != ' ')
 				i++;
 			nb++;
 		}
 		else
-		{
-			while (str[i] != ' ' && str[i])
-				i++;
 			while (str[i] == ' ')
 				i++;
-		}
 	}
 	return (nb);
 }
@@ -85,22 +79,16 @@ int		main(int ac, char **av)
 	t_param	*truc;
 	int		fd;
 
-	if (ac != 2)
+	if (ac != 2 || errors(av) == -1)
 		return (0);
 	fd = open(av[1], O_RDONLY);
 	get_next_line(fd, av);
-	if (error_one(*av) != 1)
-		return (0);
 	if ((truc = (t_param*)malloc(sizeof(t_param))) == NULL)
 		return (0);
 	truc->nbx = nb_of_nbs(*av);
 	truc->nby = 1;
 	while (get_next_line(fd, av))
-	{
-		if (error_one(*av) != 1 || nb_of_nbs(*av) != truc->nbx)
-			return (0);
 		truc->nby = truc->nby + 1;
-	}
 	close(fd);
 	set_base(truc, av);
 	mlx_key_hook(truc->win, keyboard_input, truc);
