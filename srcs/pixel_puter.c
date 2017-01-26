@@ -6,19 +6,17 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:35:37 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/24 17:43:53 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/26 13:59:20 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-float	radiantator(int degre)
-{
-	return (degre * 0.0174533);
-}
-
 void	matrice_ator(t_param *truc, float x, float y, float z)
 {
+	float	tmp;
+
+	tmp = z;
 	z = z / 4;
 	truc->tmpx = x;
 	truc->tmpy = y * cos(truc->rotx) + z * -sin(truc->rotx);
@@ -31,6 +29,7 @@ void	matrice_ator(t_param *truc, float x, float y, float z)
 	truc->tmpz = z;
 	truc->pointx[truc->fat] = truc->tmpx * truc->space * truc->zoom;
 	truc->pointy[truc->fat] = truc->tmpy * truc->space * truc->zoom;
+	truc->height[truc->fat] = tmp;
 }
 
 void	xyz(t_param *truc)
@@ -38,14 +37,16 @@ void	xyz(t_param *truc)
 	int		x;
 	int		y;
 
-	truc->rotx = radiantator(truc->xrotate);
-	truc->roty = radiantator(truc->yrotate);
-	truc->rotz = radiantator(truc->zrotate);
+	truc->rotx = truc->xrotate * 0.0174533;
+	truc->roty = truc->yrotate * 0.0174533;
+	truc->rotz = truc->zrotate * 0.0174533;
 	y = 0;
 	truc->fat = 0;
 	if (!(truc->pointx = (float*)malloc(sizeof(float) * truc->nbx * truc->nby)))
 		return ;
 	if (!(truc->pointy = (float*)malloc(sizeof(float) * truc->nbx * truc->nby)))
+		return ;
+	if (!(truc->height = (float*)malloc(sizeof(float) * truc->nbx * truc->nby)))
 		return ;
 	while (y < truc->nby)
 	{
@@ -58,6 +59,30 @@ void	xyz(t_param *truc)
 		}
 		y++;
 	}
+}
+
+void	color_height(t_param *truc, int i)
+{
+	if (truc->height[i] == 0)
+		truc->color = 0xFFFFFF;
+	if (truc->height[i] > 0)
+		truc->color = 0xFFFFCC;
+	if (truc->height[i] > 2)
+		truc->color = 0xFFFF66;
+	if (truc->height[i] > 5)
+		truc->color = 0xFFFF00;
+	if (truc->height[i] > 8)
+		truc->color = 0xFFCC00;
+	if (truc->height[i] > 12)
+		truc->color = 0xFF9900;
+	if (truc->height[i] >= 15)
+		truc->color = 0xFF6600;
+	if (truc->height[i] >= 22)
+		truc->color = 0xFF3300;
+	if (truc->height[i] >= 30)
+		truc->color = 0xFF0000;
+	if (truc->height[i] >= 40)
+		truc->color = 0xCC0000;
 }
 
 void	pixel_puter_vertical(t_param *truc)
@@ -75,12 +100,14 @@ void	pixel_puter_vertical(t_param *truc)
 				* truc->space * truc->zoom) + truc->xpadding;
 		truc->y2 = truc->pointy[i + truc->nbx] + 400 - (truc->nby / 2
 				* truc->space * truc->zoom) + truc->ypadding;
+		color_height(truc, i + truc->nbx);
 		segment_tracer(truc);
 		i++;
 	}
 	mlx_put_image_to_window(truc->id, truc->win, truc->img, 0, 0);
 	free(truc->pointx);
 	free(truc->pointy);
+	free(truc->height);
 }
 
 void	pixel_puter(t_param *truc)
@@ -101,9 +128,9 @@ void	pixel_puter(t_param *truc)
 				2 * truc->space * truc->zoom) + truc->xpadding;
 		truc->y2 = truc->pointy[i + 1] + 400 - (truc->nby /
 				2 * truc->space * truc->zoom) + truc->ypadding;
+		color_height(truc, i);
 		segment_tracer(truc);
-		tmp++;
-		if (tmp == truc->nbx - 1)
+		if (++tmp == truc->nbx - 1)
 		{
 			i++;
 			tmp = 0;

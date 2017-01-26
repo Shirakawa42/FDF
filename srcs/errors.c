@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 14:39:32 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/25 13:55:00 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/26 14:06:25 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ int		errors(char **av)
 	int		fd;
 	int		max;
 
-	fd = open(av[1], O_RDONLY);
-	get_next_line(fd, av);
+	if ((fd = open(av[1], O_RDONLY)) == -1)
+		return (-1);
+	if ((get_next_line(fd, av)) == -1)
+		return (-1);
 	max = nb_of_nbs(*av);
 	while (get_next_line(fd, av))
 		if (nb_of_nbs(*av) != max)

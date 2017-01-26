@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 14:51:18 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/25 13:54:55 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/26 13:32:23 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct	s_param
 	int		yrotate;
 	int		zrotate;
 	int		fat;
+	float	*height;
 }				t_param;
 
 void			pixel_puter(t_param *truc);
