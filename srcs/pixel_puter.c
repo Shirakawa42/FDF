@@ -6,7 +6,7 @@
 /*   By: lvasseur <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:35:37 by lvasseur          #+#    #+#             */
-/*   Updated: 2017/01/26 13:59:20 by lvasseur         ###   ########.fr       */
+/*   Updated: 2017/01/26 14:34:48 by lvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	color_height(t_param *truc, int i)
 		truc->color = 0xFF0000;
 	if (truc->height[i] >= 40)
 		truc->color = 0xCC0000;
+	if (truc->height[i] >= 110)
+		truc->color = 0x990000;
 }
 
 void	pixel_puter_vertical(t_param *truc)
